@@ -1,0 +1,128 @@
+{
+  "e-green-30": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 0,
+    "y": 0
+  },
+  "east-green": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 0,
+    "y": 512
+  },
+  "east-red": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 0,
+    "y": 1024
+  },
+  "east-west": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 0,
+    "y": 1536
+  },
+  "logo-phase-3": {
+    "height": 423,
+    "pixelRatio": 1,
+    "width": 483,
+    "x": 2560,
+    "y": 0
+  },
+  "n-green-30": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 512,
+    "y": 0
+  },
+  "north-blue": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 512,
+    "y": 512
+  },
+  "north-bound": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 512,
+    "y": 1024
+  },
+  "north-south": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 512,
+    "y": 1536
+  },
+  "north-yellow": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 1024,
+    "y": 0
+  },
+  "s-green-30": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 1024,
+    "y": 512
+  },
+  "selected-plane": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 1024,
+    "y": 1024
+  },
+  "south-blue": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 1024,
+    "y": 1536
+  },
+  "south-bound": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 1536,
+    "y": 0
+  },
+  "south-yellow": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 1536,
+    "y": 512
+  },
+  "w-green-30": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 1536,
+    "y": 1024
+  },
+  "west-green": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 1536,
+    "y": 1536
+  },
+  "west-red": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 2048,
+    "y": 0
+  }
+}

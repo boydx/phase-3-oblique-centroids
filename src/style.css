@@ -1,0 +1,61 @@
+@import "https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap";
+@import "tailwindcss";
+
+body {
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+  background-color: rgb(243 244 246);
+  font-size: 100%;
+}
+
+.maplibregl-ctrl-scale,
+.maplibregl-ctrl-attrib-inner,
+.maplibregl-popup-content {
+  font-family: "Funnel Display", sans-serif;
+  font-weight: 400;
+}
+
+a {
+  @apply text-green-600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+a:hover {
+  @apply text-green-900;
+}
+
+#modal {
+  background-color: rgb(229 231 229);
+}
+
+#controls {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+#hidden-controls {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}

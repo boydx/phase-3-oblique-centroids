@@ -1,0 +1,20 @@
+{
+  "name": "phase-3-oblique-centroids",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.10",
+    "maplibre-gl": "^5.6.0",
+    "pmtiles": "^4.3.0",
+    "tailwindcss": "^4.1.10"
+  }
+}

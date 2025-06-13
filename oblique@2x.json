@@ -1,0 +1,128 @@
+{
+  "e-green-30": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 0,
+    "y": 0
+  },
+  "east-green": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 0,
+    "y": 1024
+  },
+  "east-red": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 0,
+    "y": 2048
+  },
+  "east-west": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 0,
+    "y": 3072
+  },
+  "logo-phase-3": {
+    "height": 846,
+    "pixelRatio": 2,
+    "width": 966,
+    "x": 5120,
+    "y": 0
+  },
+  "n-green-30": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 1024,
+    "y": 0
+  },
+  "north-blue": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 1024,
+    "y": 1024
+  },
+  "north-bound": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 1024,
+    "y": 2048
+  },
+  "north-south": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 1024,
+    "y": 3072
+  },
+  "north-yellow": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 2048,
+    "y": 0
+  },
+  "s-green-30": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 2048,
+    "y": 1024
+  },
+  "selected-plane": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 2048,
+    "y": 2048
+  },
+  "south-blue": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 2048,
+    "y": 3072
+  },
+  "south-bound": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 3072,
+    "y": 0
+  },
+  "south-yellow": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 3072,
+    "y": 1024
+  },
+  "w-green-30": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 3072,
+    "y": 2048
+  },
+  "west-green": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 3072,
+    "y": 3072
+  },
+  "west-red": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 4096,
+    "y": 0
+  }
+}

@@ -1,0 +1,506 @@
+{
+    "version": 8,
+    "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=2YBztVbMLbbw5PKa7l11",
+    "sprite": "https://nyc3.digitaloceanspaces.com/astoria/tiles/phase3-obliques/sprites/oblique",
+    "sources": {
+        "hillshade": {
+            "type": "raster",
+            "tiles": [
+                "https://kygisserver.ky.gov/arcgis/rest/services/WGS84WM_Services/Ky_MultiDirectional_Hillshade_WGS84WM/MapServer/tile/{z}/{y}/{x}"
+            ],
+            "tileSize": 256,
+            "maxzoom": 19
+        },
+        "topo": {
+            "type": "raster",
+            "tiles": [
+                "https://kygisserver.ky.gov/arcgis/rest/services/WGS84WM_Services/Ky_KyTopo_Map_Series_WGS84WM/MapServer/tile/{z}/{y}/{x}"
+            ],
+            "tileSize": 256,
+            "maxzoom": 19
+        },
+        "aerial": {
+            "type": "raster",
+            "tiles": [
+                "https://kygisserver.ky.gov/arcgis/rest/services/WGS84WM_Services/Ky_Imagery_Phase3_3IN_WGS84WM/MapServer/tile/{z}/{y}/{x}"
+            ],
+            "tileSize": 256,
+            "maxzoom": 21
+        },
+        "on-points": {
+            "type": "vector",
+            "url": "pmtiles://https://nyc3.digitaloceanspaces.com/astoria/tiles/phase3-obliques/centroids.pmtiles"
+        },
+        "usfs": {
+            "type": "vector",
+            "url": "pmtiles://https://contig.us/data/pmtiles/dbnf_202306.pmtiles"
+        },
+        "stream_area": {
+            "type": "vector",
+            "url": "pmtiles://https://contig.us/data/pmtiles/ky-strm-area.pmtiles"
+        },
+        "stream_waterbody": {
+            "type": "vector",
+            "url": "pmtiles://https://contig.us/data/pmtiles/ky_strm_waterbody.pmtiles"
+        },
+        "stream_line": {
+            "type": "vector",
+            "url": "pmtiles://https://contig.us/data/pmtiles/ky_strm_line.pmtiles"
+        },
+        "counties": {
+            "type": "vector",
+            "url": "pmtiles://https://contig.us/data/pmtiles/ky-counties.pmtiles"
+        },
+        "mask": {
+            "type": "vector",
+            "url": "pmtiles://https://contig.us/data/pmtiles/mask.pmtiles"
+        },
+        "terrainSource": {
+            "type": "raster-dem",
+            "url": "terrain.json",
+            "tileSize": 256
+        }
+    },
+    "layers": [
+        {
+            "id": "background",
+            "type": "background",
+            "paint": {
+                "background-color": "rgba(175, 175, 175, 1)",
+                "background-opacity": 1
+            }
+        },
+        {
+            "id": "topo",
+            "type": "raster",
+            "source": "topo",
+            "layout": {
+                "visibility": "none"
+            },
+            "paint": {
+                "raster-brightness-min": 0.5
+            }
+        },
+        {
+            "id": "aerial",
+            "type": "raster",
+            "source": "aerial",
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "raster-brightness-min": 0.2,
+                "raster-saturation": 0.4
+            }
+        },
+        {
+            "id": "hillshade",
+            "type": "raster",
+            "source": "hillshade",
+            "layout": {
+                "visibility": "none"
+            },
+            "paint": {
+                "raster-brightness-min": 0.2
+            }
+        },
+        {
+            "id": "public-land",
+            "type": "fill",
+            "source": "usfs",
+            "source-layer": "natural",
+            "layout": {
+                "visibility": "none"
+            },
+            "paint": {
+                "fill-color": "green",
+                "fill-opacity": 0.2
+            }
+        },
+        {
+            "id": "stream-line",
+            "type": "line",
+            "source": "stream_line",
+            "source-layer": "ky_strm_line",
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round",
+                "visibility": "none"
+            },
+            "paint": {
+                "line-color": "skyblue",
+                "line-opacity": 1,
+                "line-width": {
+                    "stops": [
+                        [
+                            6,
+                            0.5
+                        ],
+                        [
+                            10,
+                            1
+                        ],
+                        [
+                            20,
+                            4
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "id": "stream-waterbodies",
+            "type": "fill",
+            "source": "stream_waterbody",
+            "source-layer": "ky_strm_waterbody",
+            "layout": {
+                "visibility": "none"
+            },
+            "paint": {
+                "fill-color": "skyblue",
+                "fill-opacity": 1
+            }
+        },
+        {
+            "id": "stream-areas",
+            "type": "fill",
+            "source": "stream_area",
+            "source-layer": "kystrmarea",
+            "layout": {
+                "visibility": "none"
+            },
+            "paint": {
+                "fill-color": "skyblue",
+                "fill-opacity": 1
+            }
+        },
+        {
+            "id": "counties",
+            "type": "fill",
+            "source": "counties",
+            "source-layer": "counties",
+            "paint": {
+                "fill-color": [
+                    "case",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "County_Name"
+                        ],
+                        "Fayette"
+                    ],
+                    "#cccccc",
+                    "#cccccc"
+                ],
+                "fill-opacity": 0.02
+            }
+        },
+        {
+            "id": "mask",
+            "type": "fill",
+            "source": "mask",
+            "source-layer": "mask",
+            "maxzoom": 22,
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "fill-antialias": true,
+                "fill-color": "#ccc",
+                "fill-opacity": 0.9
+            }
+        },
+        {
+            "id": "counties-line",
+            "type": "line",
+            "source": "counties",
+            "source-layer": "counties",
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round"
+            },
+            "paint": {
+                "line-color": "#666",
+                "line-opacity": 1,
+                "line-width": {
+                    "stops": [
+                        [
+                            1,
+                            0
+                        ],
+                        [
+                            6,
+                            0
+                        ],
+                        [
+                            8,
+                            1
+                        ],
+                        [
+                            11,
+                            2
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "id": "obliques-south",
+            "type": "symbol",
+            "source": "on-points",
+            "source-layer": "centroids",
+            "filter": [
+                "all",
+                [
+                    "==",
+                    [
+                        "%",
+                        [
+                            "to-number",
+                            [
+                                "get",
+                                "FL"
+                            ]
+                        ],
+                        2
+                    ],
+                    0
+                ],
+                [
+                    "==",
+                    [
+                        "get",
+                        "CameraID"
+                    ],
+                    "Color"
+                ]
+            ],
+            "layout": {
+                "icon-anchor": "center",
+                "icon-image": "south-bound",
+                "visibility": "visible",
+                "icon-size": [
+                    "interpolate",
+                    [
+                        "linear"
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    5,
+                    0.001,
+                    10,
+                    0.02,
+                    15,
+                    0.05,
+                    20,
+                    0.15
+                ]
+            }
+        },
+        {
+            "id": "obliques-north",
+            "type": "symbol",
+            "source": "on-points",
+            "source-layer": "centroids",
+            "filter": [
+                "all",
+                [
+                    "!=",
+                    [
+                        "%",
+                        [
+                            "to-number",
+                            [
+                                "get",
+                                "FL"
+                            ]
+                        ],
+                        2
+                    ],
+                    0
+                ],
+                [
+                    "==",
+                    [
+                        "get",
+                        "CameraID"
+                    ],
+                    "Color"
+                ]
+            ],
+            "layout": {
+                "icon-anchor": "center",
+                "icon-image": "north-bound",
+                "visibility": "visible",
+                "icon-size": [
+                    "interpolate",
+                    [
+                        "linear"
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    5,
+                    0.001,
+                    10,
+                    0.02,
+                    15,
+                    0.05,
+                    20,
+                    0.15
+                ]
+            }
+        },
+        {
+            "id": "obliques-north-images",
+            "type": "symbol",
+            "source": "on-points",
+            "source-layer": "centroids",
+            "filter": [
+                "all",
+                [
+                    "!=",
+                    [
+                        "%",
+                        [
+                            "to-number",
+                            [
+                                "get",
+                                "FL"
+                            ]
+                        ],
+                        2
+                    ],
+                    0
+                ],
+                [
+                    "!=",
+                    [
+                        "get",
+                        "CameraID"
+                    ],
+                    "Color"
+                ]
+            ],
+            "layout": {
+                "icon-anchor": "center",
+                "icon-image": [
+                    "case",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "CameraID"
+                        ],
+                        "Left"
+                    ],
+                    "east-west",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "CameraID"
+                        ],
+                        "Right"
+                    ],
+                    "east-west",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "CameraID"
+                        ],
+                        "Fwd"
+                    ],
+                    "north-south",
+                    "north-south"
+                ],
+                "visibility": "none",
+                "icon-size": 0.2
+            }
+        },
+        {
+            "id": "obliques-south-images",
+            "type": "symbol",
+            "source": "on-points",
+            "source-layer": "centroids",
+            "filter": [
+                "all",
+                [
+                    "==",
+                    [
+                        "%",
+                        [
+                            "to-number",
+                            [
+                                "get",
+                                "FL"
+                            ]
+                        ],
+                        2
+                    ],
+                    0
+                ],
+                [
+                    "!=",
+                    [
+                        "get",
+                        "CameraID"
+                    ],
+                    "Color"
+                ]
+            ],
+            "layout": {
+                "icon-anchor": "center",
+                "icon-image": [
+                    "case",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "CameraID"
+                        ],
+                        "Left"
+                    ],
+                    "east-west",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "CameraID"
+                        ],
+                        "Right"
+                    ],
+                    "east-west",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "CameraID"
+                        ],
+                        "Fwd"
+                    ],
+                    "north-south",
+                    "north-south"
+                ],
+                "visibility": "none",
+                "icon-size": 0.2
+            }
+        },
+        {
+            "id": "selected-plane",
+            "type": "symbol",
+            "source": "on-points",
+            "source-layer": "centroids",
+            "layout": {
+                "icon-anchor": "center",
+                "icon-image": "selected-plane",
+                "icon-allow-overlap": false,
+                "visibility": "none",
+                "icon-size": 0.2
+            }
+        }
+    ]
+}
