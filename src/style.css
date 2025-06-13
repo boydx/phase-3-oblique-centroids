@@ -18,7 +18,6 @@ body {
 a {
   @apply text-green-600;
   text-decoration: underline;
-  cursor: pointer;
 }
 a:hover {
   @apply text-green-900;
