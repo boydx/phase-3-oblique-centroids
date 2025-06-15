@@ -21,6 +21,11 @@ a {
 }
 a:hover {
   @apply text-green-900;
+  /* color: rgb(236, 0, 140); */
+}
+
+.active {
+  background-color: rgb(236, 0, 140);
 }
 
 #modal {

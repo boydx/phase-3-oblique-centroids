@@ -2,6 +2,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import "./style.css";
 import maplibregl from "maplibre-gl";
 import * as pmtiles from "pmtiles";
+import * as turf from "@turf/turf";
 
 const ui = {
   map: document.getElementById("map"),
@@ -15,6 +16,11 @@ const ui = {
   searchInput: document.getElementById("search-input"),
   reset: document.getElementById("reset"),
   imagery: document.getElementById("selected-imagery"),
+  centroids: document.getElementById("search-centroids"),
+  zoom: document.getElementById("zoom"),
+  imageForGeoJSON: document.getElementById("selected-imagery-geojson"),
+  downloadSection: document.getElementById("download-section"),
+  downloadGeoJSON: document.getElementById("download-geojson"),
 }
 
 function map() {
@@ -24,7 +30,7 @@ function map() {
     response.json().then((style) => {
       const map = new maplibregl.Map({
         container: "map",
-        name: "Jackson County locations",
+        name: "Phase 3 Oblique Centroids",
         hash: true,
         zoom: 10.66,
         center: [-84.0183, 37.4145],
@@ -32,14 +38,31 @@ function map() {
         maxPitch: 85,
         attributionControl: false,
         maxBounds: [
-          [-124.848974, 24.396308], // Southwest coordinates (California, Florida)
-          [-66.885444, 49.384358]   // Northeast coordinates (Maine, Minnesota)
+          [-124.848974, 24.396308],
+          [-66.885444, 49.384358]
         ],
         style: style
       });
 
-      map.on("load", function (e) {
+      let z = false;
+      const squares = [];
+      const zoom = (coords) => {
+        if (z) {
+          map.flyTo({
+            center: coords,
+            zoom: 12.5,
+            speed: 0.5,
+            curve: 1,
+            essential: true
+          });
+        }
+      }
+      ui.zoom.addEventListener("click", () => {
+        z = !z;
+        ui.zoom.classList.toggle("active");
+      });
 
+      map.on("load", function (e) {
         map.setSky({
           'sky-color': "skyblue",
           'sky-horizon-blend': 1,
@@ -48,7 +71,6 @@ function map() {
           'fog-color': "whitesmoke",
           'fog-ground-blend': 0,
         });
-
       });
 
       map.addControl(
@@ -75,7 +97,6 @@ function map() {
       map.addControl(geolocate);
 
       geolocate.on("geolocate", function (e) {
-        // console.log("Geolocated at: ", e.coords);
         const lat = e.coords.latitude;
         const lng = e.coords.longitude;
       });
@@ -119,17 +140,8 @@ function map() {
             `Right_${id[1]}_${id[2]}`
           ];
           map.setFilter("obliques-north-images", ["in", ["get", "ShotID"], ["literal", shotIds]]);
-          map.flyTo({
-            center: coordinates,
-            zoom: 12.5,
-            speed: 0.5,
-            curve: 1,
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
-          });
+          zoom(coordinates);
         }
-
-
-
       });
 
       map.on("click", "obliques-south", (e) => {
@@ -141,7 +153,6 @@ function map() {
           const selected = props.OBJECTID;
           map.setFilter("selected-plane", ["==", ["get", "OBJECTID"], selected]);
           map.setLayoutProperty('selected-plane', 'visibility', 'visible');
-
 
           new maplibregl.Popup()
             .setLngLat(coordinates)
@@ -156,26 +167,16 @@ function map() {
             `Right_${id[1]}_${id[2]}`
           ];
           map.setFilter("obliques-south-images", ["in", ["get", "ShotID"], ["literal", shotIds]]);
-          map.flyTo({
-            center: coordinates,
-            zoom: 12.5,
-            speed: 0.5,
-            curve: 1,
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
-          });
+          zoom(coordinates);
         }
-
       });
 
       map.on("click", "obliques-south-images", (e) => {
-        // map.setLayoutProperty('obliques-north-images', 'visibility', 'none');
         if (e.features.length > 0) {
           const coordinates = e.features[0].geometry.coordinates;
           const props = e.features[0].properties;
-          // console.log(props)
           const id = props.ShotID
           const direction = props.CameraID === "Fwd" ? "Forward" : props.CameraID === "Bwd" ? "Backward" : props.CameraID === "Left" ? "Left" : "Right";
-
           const popup = `<div class="text-2xl mb-2">${direction}</div>
         <a class="text-lg" href="${props.S3URL}">${id}.tif</a>`;
 
@@ -184,18 +185,14 @@ function map() {
             .setHTML(popup)
             .addTo(map);
         }
-
       });
 
       map.on("click", "obliques-north-images", (e) => {
-        // map.setLayoutProperty('obliques-north-images', 'visibility', 'none');
         if (e.features.length > 0) {
           const coordinates = e.features[0].geometry.coordinates;
           const props = e.features[0].properties;
-          // console.log(props)
           const id = props.ShotID
           const direction = props.CameraID === "Fwd" ? "Forward" : props.CameraID === "Bwd" ? "Backward" : props.CameraID === "Left" ? "Left" : "Right";
-
           const popup = `<div class="text-2xl mb-2">${direction}</div>
         <a class="text-lg" href="${props.S3URL}">${id}.tif</a>`;
 
@@ -204,27 +201,103 @@ function map() {
             .setHTML(popup)
             .addTo(map);
         }
-
       });
 
       map.on("click", "selected-plane", (e) => {
-        // map.setLayoutProperty('obliques-north-images', 'visibility', 'none');
         if (e.features.length > 0) {
           const coordinates = e.features[0].geometry.coordinates;
           const props = e.features[0].properties;
-          // console.log(props)
           const id = props.ShotID
-
-
           const popup = `<div class="text-2xl mb-2">Nadir</div>
         <a class="text-lg" href="${props.S3URL}">${id}.tif</a>`;
-
           new maplibregl.Popup()
             .setLngLat(coordinates)
             .setHTML(popup)
             .addTo(map);
         }
+      });
 
+      map.on("click", "all-oblique-centroids", (e) => {
+        if (e.features.length > 0) {
+          const coordinates = e.features[0].geometry.coordinates;
+          const props = e.features[0].properties;
+          const date = new Date(props.FlightDate).toLocaleDateString();
+          const id = props.ShotID
+          const dir = props.CameraID
+          const popup = `<div class="text-2xl mb-1">${dir} centroid</div>
+          <div class="text-lg mb-2">${date}</div>
+        <a class="text-lg" href="${props.S3URL}">${id}.tif</a>`;
+          new maplibregl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(popup)
+            .addTo(map);
+        }
+      });
+
+      map.on("click", "all-oblique-centroids", (e) => {
+        if (e.features.length > 0) {
+          const coordinates = e.features[0].geometry.coordinates;
+          const props = e.features[0].properties;
+          const date = new Date(props.FlightDate).toLocaleDateString();
+          const id1 = props.ShotID.split("_");
+          const id = `${id1[1]}_${id1[2]}`;
+          const url = props.S3URL;
+          const dir = props.CameraID
+          const point = turf.point(coordinates);
+          const buffered = turf.buffer(point, 300, { units: 'meters' }); // 0.25km radius = 0.5km diameter
+          const bbox = turf.bbox(buffered);
+          const square = turf.bboxPolygon(bbox);
+          const squareFeature = {
+            type: 'Feature',
+            properties: {
+              type: 'active oblique frame boundary',
+              id: id,
+              centroid: coordinates,
+              season: props.Season,
+              year: props.Year,
+              dir: dir,
+              url: url,
+              fl: props.FL,
+              date: date,
+              time: props.FlightTime,
+              file: props.Filename
+            },
+            geometry: square.geometry
+          };
+          squares.push(squareFeature);
+          map.getSource('frames').setData({
+            type: 'FeatureCollection',
+            features: squares
+          });
+
+          const popup = `
+          <div class="text-lg"><a class="text-lg" href="${props.S3URL}">${props.ShotID}.tif</a></div>
+        `;
+          ui.imageForGeoJSON.innerHTML += `${popup}`;
+
+        }
+      });
+
+      ui.centroids.addEventListener("click", () => {
+        ui.downloadSection.classList.toggle("hidden");
+        ui.imageForGeoJSON.classList.toggle("hidden");
+        ui.imagery.classList.toggle("hidden");
+        const visibility = map.getLayoutProperty("all-oblique-centroids", "visibility");
+        if (visibility === "none") {
+          map.setLayoutProperty("all-oblique-centroids", "visibility", "visible");
+          ui.centroids.classList.add("active");
+          map.setLayoutProperty("obliques-north", "visibility", "none");
+          map.setLayoutProperty("obliques-south", "visibility", "none");
+          map.setLayoutProperty("frame-fill", "visibility", "visible");
+          map.setLayoutProperty("frame-stroke", "visibility", "visible");
+        } else {
+          map.setLayoutProperty("all-oblique-centroids", "visibility", "none");
+          ui.centroids.classList.remove("active");
+          map.setLayoutProperty("obliques-north", "visibility", "visible");
+          map.setLayoutProperty("obliques-south", "visibility", "visible");
+          map.setLayoutProperty("frame-fill", "visibility", "none");
+          map.setLayoutProperty("frame-stroke", "visibility", "none");
+        }
       });
 
       ui.search.addEventListener("click", () => {
@@ -263,54 +336,48 @@ function map() {
             const cam = flight.properties.CameraID;
             if (shotId[1] == id[0] && shotId[2] == id[1] && cam == "Color") {
               searchTerm = flight.properties.OBJECTID;
-              // console.log("Found shot: ", flight);
-              // map.setFilter("selected-plane", ["==", ["get", "OBJECTID"], searchTerm]);
-              // map.setLayoutProperty("selected-plane", "icon-allow-overlap", true);
-              // map.setLayoutProperty("obliques-south-images", "visibility", "none");
-              // map.setLayoutProperty("obliques-north-images", "visibility", "none");
-              // map.setFilter("obliques-south-images", ["==", ["get", "OBJECTID"], searchTerm]);
-              // map.setFilter("obliques-north-images", ["==", ["get", "OBJECTID"], searchTerm]);
-              // map.setLayoutProperty("selected-plane", "visibility", "visible");
-              // map.setLayoutProperty("obliques-south-images", "visibility", "visible");
-              // map.setLayoutProperty("obliques-north-images", "visibility", "visible");
-              map.flyTo({
-                center: flight.geometry.coordinates,
-                zoom: 15,
-                speed: 0.5,
-                curve: 1,
-                essential: true // this animation is considered essential with respect to prefers-reduced-motion
-              });
+              zoom(flight.geometry.coordinates);
             }
             if (shotId[1] == id[0] && shotId[2] == id[1]) {
               return flight;
             }
             return false;
-            // if (flight) {
-            //   console.log("Images: ", images, flights);
-            //   searchTerm += ""
-            //   map.setFilter("selected-plane", ["==", ["get", "FL"], searchTerm]);
-            //   // map.setLayoutProperty("selected-plane", "visibility", "visible");
-            // }
           })
-
-          ui.reset.addEventListener("click", () => {
-            map.setFilter("obliques-south-images", null);
-            map.setFilter("obliques-north-images", null);
-            map.setFilter("selected-plane", null);
-            map.setLayoutProperty("selected-plane", "visibility", "none");
-            map.setLayoutProperty("obliques-south-images", "visibility", "none");
-            map.setLayoutProperty("obliques-north-images", "visibility", "none");
-            map.setLayoutProperty("obliques-north", "visibility", "visible");
-            map.setLayoutProperty("obliques-south", "visibility", "visible");
-          }
-          );
-
-          map.on("error", (e) => {
-            console.error("Map error: ", e);
-          });
-
         }
       })
+
+      ui.reset.addEventListener("click", () => {
+        ui.centroids.classList.remove("active");
+        ui.downloadSection.classList.add("hidden");
+        map.setFilter("obliques-south-images", null);
+        map.setFilter("obliques-north-images", null);
+        map.setFilter("selected-plane", null);
+        map.setLayoutProperty("selected-plane", "visibility", "none");
+        map.setLayoutProperty("obliques-south-images", "visibility", "none");
+        map.setLayoutProperty("obliques-north-images", "visibility", "none");
+        map.setLayoutProperty("obliques-north", "visibility", "visible");
+        map.setLayoutProperty("obliques-south", "visibility", "visible");
+        map.setLayoutProperty("all-oblique-centroids", "visibility", "none");
+        map.setLayoutProperty("frame-fill", "visibility", "none");
+        map.setLayoutProperty("frame-stroke", "visibility", "none");
+      }
+      );
+
+      ui.downloadGeoJSON.addEventListener("click", () => {
+        const geojson = map.getSource('frames')._data;
+        const blob = new Blob([JSON.stringify(geojson)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const dateForFileName = new Date().toISOString().split('T')[0];
+        a.href = url;
+        a.download = `KyFromAbove-phase-3-oblique-active-frames-${dateForFileName}.geojson`;
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      map.on("error", (e) => {
+        console.error("Map error: ", e);
+      });
     })
   });
 }
@@ -321,15 +388,15 @@ function buildPopupContent(e) {
   const season = props.Season;
   const year = props.Year;
   const id = props.ShotID.split("_")
-  const color = `KY_KYAPED_${year}_Season${season}_3IN/Color_${id[1]}_${id[2]}.tif`;
-  const fwd = `KY_KYAPED_${year}_Season${season}_3IN/Fwd_${id[1]}_${id[2]}.tif`;
-  const bwd = `KY_KYAPED_${year}_Season${season}_3IN/Bwd_${id[1]}_${id[2]}.tif`;
-  const left = `KY_KYAPED_${year}_Season${season}_3IN/Left_${id[1]}_${id[2]}.tif`;
-  const right = `KY_KYAPED_${year}_Season${season}_3IN/Right_${id[1]}_${id[2]}.tif`;
+  const color = `KY_KYAPED_${year}_Season${season} _3IN / Color_${id[1]}_${id[2]}.tif`;
+  const fwd = `KY_KYAPED_${year}_Season${season} _3IN / Fwd_${id[1]}_${id[2]}.tif`;
+  const bwd = `KY_KYAPED_${year}_Season${season} _3IN / Bwd_${id[1]}_${id[2]}.tif`;
+  const left = `KY_KYAPED_${year}_Season${season} _3IN / Left_${id[1]}_${id[2]}.tif`;
+  const right = `KY_KYAPED_${year}_Season${season} _3IN / Right_${id[1]}_${id[2]}.tif`;
   const base = 'https://kyfromabove.s3.amazonaws.com/imagery/obliques/Phase3/'
-  const popup1 = `<div class="text-2xl mb-2 mt-2 ">File downloads</div>
-  <div class="text-xl mb-2 mt-2 ">KY_KYAPED_${year}_Season${season}_3IN</div>
-            Forward: <a href="${base}${fwd}" >Fwd_${id[1]}_${id[2]}.tif</a><br>
+  const popup1 = `
+          <div class="text-xl mb-2 mt-2 ">KY_KYAPED_${year}_Season${season}_3IN</div>
+        Forward: <a href="${base}${fwd}" >Fwd_${id[1]}_${id[2]}.tif</a><br>
             Backward: <a href="${base}${bwd}">Bwd_${id[1]}_${id[2]}.tif</a><br>
             Left: <a href="${base}${left}">Left_${id[1]}_${id[2]}.tif</a><br>
             Right: <a href="${base}${right}" >Right_${id[1]}_${id[2]}.tif</a><br>
@@ -341,26 +408,16 @@ function buildPopupContent(e) {
   Shot: ${id[2]}<br>
   ID: ${id[1]}_${id[2]}</div>
   `
-
   ui.imagery.innerHTML = `${popup} ${popup1}`;
   return popup;
 }
 
-function buildUI() {
-
-
-
+document.addEventListener("DOMContentLoaded", () => {
   ui.info.addEventListener("click", () => {
     ui.modal.style.display = "block";
   });
   ui.closeModal.addEventListener("click", () => {
     ui.modal.style.display = "none";
   });
-
-}
-
-document.addEventListener("DOMContentLoaded", () => {
   map();
-  buildUI();
-}
-);
+});
