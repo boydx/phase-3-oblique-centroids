@@ -31,6 +31,13 @@
             "type": "vector",
             "url": "pmtiles://https://nyc3.digitaloceanspaces.com/astoria/tiles/phase3-obliques/centroids.pmtiles"
         },
+        "frames": {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": []
+            }
+        },
         "usfs": {
             "type": "vector",
             "url": "pmtiles://https://contig.us/data/pmtiles/dbnf_202306.pmtiles"
@@ -278,6 +285,7 @@
             ],
             "layout": {
                 "icon-anchor": "center",
+                "icon-allow-overlap": false,
                 "icon-image": "south-bound",
                 "visibility": "visible",
                 "icon-size": [
@@ -333,6 +341,7 @@
             "layout": {
                 "icon-anchor": "center",
                 "icon-image": "north-bound",
+                "icon-allow-overlap": false,
                 "visibility": "visible",
                 "icon-size": [
                     "interpolate",
@@ -386,6 +395,7 @@
             ],
             "layout": {
                 "icon-anchor": "center",
+                "icon-allow-overlap": false,
                 "icon-image": [
                     "case",
                     [
@@ -454,6 +464,7 @@
             ],
             "layout": {
                 "icon-anchor": "center",
+                "icon-allow-overlap": false,
                 "icon-image": [
                     "case",
                     [
@@ -497,9 +508,69 @@
             "layout": {
                 "icon-anchor": "center",
                 "icon-image": "selected-plane",
-                "icon-allow-overlap": false,
+                "icon-allow-overlap": true,
                 "visibility": "none",
                 "icon-size": 0.2
+            }
+        },
+        {
+            "id": "frame-fill",
+            "type": "fill",
+            "source": "frames",
+            "paint": {
+                "fill-color": "yellow",
+                "fill-opacity": 0.05
+            }
+        },
+        {
+            "id": "frame-stroke",
+            "type": "line",
+            "source": "frames",
+            "paint": {
+                "line-color": "yellow",
+                "line-opacity": 1
+            }
+        },
+        {
+            "id": "all-oblique-centroids",
+            "type": "circle",
+            "source": "on-points",
+            "source-layer": "centroids",
+            "filter": [
+                "all",
+                [
+                    "!=",
+                    [
+                        "get",
+                        "CameraID"
+                    ],
+                    "Color"
+                ]
+            ],
+            "layout": {
+                "visibility": "none"
+            },
+            "paint": {
+                "circle-radius": [
+                    "interpolate",
+                    [
+                        "linear"
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    5,
+                    0,
+                    10,
+                    1,
+                    15,
+                    5,
+                    20,
+                    10
+                ],
+                "circle-color": "rgba(236, 0, 140,0.2)",
+                "circle-stroke-color": "rgb(236, 0, 140)",
+                "circle-stroke-width": 2
             }
         }
     ]
