@@ -20,26 +20,35 @@
 
 <body>
     <canvas id="geotiffCanvas"></canvas>
+    <div id="info"></div>
+    <img id='t' src="logo-phase-3.svg" alt="Phase 3 logo">
     <script src="https://cdn.jsdelivr.net/npm/geotiff"></script>
 
     <script>
 
+        // Global variables for zoom and pan
+        let zoomLevel = 1;
+        let panX = 0;
+        let panY = 0;
+        let isDragging = false;
+        let lastMouseX = 0;
+        let lastMouseY = 0;
+        let originalImageData = null;
+
         async function loadAndRenderGeoTIFF(url, canvasId) {
             try {
+                const info = document.getElementById('info');
                 const tiff = await GeoTIFF.fromUrl(url);
                 const image = await tiff.getImage();
-                console.log("TIFF loaded successfully", image);
+                info.innerHTML += "COG TIFF successfully found. Parsing...<br>";
                 const width = image.getWidth();
                 const height = image.getHeight();
+                info.innerHTML += `${width} x ${height} pixels. Still parsing...<br>`;
                 const raster = await image.readRGB();
                 const origin = image.getOrigin();
                 const resolution = image.getResolution();
                 const bbox = image.getBoundingBox();
-                console.log("Image dimensions:", width, "x", height);
-                console.log("Origin:", origin);
-                console.log("Resolution:", resolution);
-                console.log("Bounding Box:", bbox);
-                console.log("Raster data:", raster);
+                info.innerHTML += `"Origin:" ${origin} x ${height}.  "Bounding Box:", ${bbox}<br>`;
                 const canvas = document.getElementById(canvasId);
                 canvas.width = width;
                 canvas.height = height;
@@ -57,6 +66,28 @@
                     }
                 }
                 ctx.putImageData(imageData, 0, 0);
+
+                // Convert to JPG for better mobile performance
+                const jpegDataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                // Remove the canvas element and clear cached data
+                canvas.remove();
+                originalImageData = null;
+                const img = new Image();
+                img.onload = function () {
+                    // Clear canvas and draw the JPG image
+                    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    // ctx.drawImage(img, 0, 0);
+
+                    // // Store the image for zoom/pan operations
+                    // originalImageData = img;
+
+                    // Setup zoom and pan controls
+                    // setupZoomAndPan(canvas);
+
+                    document.getElementById('t').src = jpegDataUrl;
+                };
+
+                img.src = jpegDataUrl;
             } catch (error) {
                 console.error("Error loading or rendering GeoTIFF:", error);
             }
