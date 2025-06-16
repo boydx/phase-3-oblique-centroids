@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COG TIFF Image Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="geotiffCanvas"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/geotiff"></script>
+
+    <script>
+
+        async function loadAndRenderGeoTIFF(url, canvasId) {
+            try {
+                const tiff = await GeoTIFF.fromUrl(url);
+                const image = await tiff.getImage();
+                console.log("TIFF loaded successfully", image);
+                const width = image.getWidth();
+                const height = image.getHeight();
+                const raster = await image.readRGB();
+                const origin = image.getOrigin();
+                const resolution = image.getResolution();
+                const bbox = image.getBoundingBox();
+                console.log("Image dimensions:", width, "x", height);
+                console.log("Origin:", origin);
+                console.log("Resolution:", resolution);
+                console.log("Bounding Box:", bbox);
+                console.log("Raster data:", raster);
+                const canvas = document.getElementById(canvasId);
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext("2d");
+                const imageData = ctx.createImageData(width, height);
+                const data = imageData.data;
+                if (raster.length) {
+                    for (let i = 0; i < width * height; i++) {
+                        const pixelIndex = i * 4;
+                        const r = i * 3;
+                        data[pixelIndex] = raster[r];       // Red
+                        data[pixelIndex + 1] = raster[r + 1];   // Green
+                        data[pixelIndex + 2] = raster[r + 2];   // Blue
+                        data[pixelIndex + 3] = 255;    // Alpha
+                    }
+                }
+                ctx.putImageData(imageData, 0, 0);
+            } catch (error) {
+                console.error("Error loading or rendering GeoTIFF:", error);
+            }
+        }
+
+        loadAndRenderGeoTIFF("https://kyfromabove.s3.amazonaws.com/imagery/obliques/Phase3/KY_KYAPED_2024_Season1_3IN/Right_7212_2552.tif", "geotiffCanvas");
+    </script>
+</body>
+
+</html>
