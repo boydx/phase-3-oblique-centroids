@@ -178,7 +178,7 @@ function map() {
           const id = props.ShotID
           const direction = props.CameraID === "Fwd" ? "Forward" : props.CameraID === "Bwd" ? "Backward" : props.CameraID === "Left" ? "Left" : "Right";
           const popup = `<div class="text-2xl mb-2">${direction}</div>
-        <a class="text-lg" href="${props.S3URL}">${id}.tif</a>`;
+        <a class="text-lg" href="${props.S3URL}">${id}.tif</a> <br> <a class="text-lg" target='_blank' href="view.html?file=${props.Filename}">Preview</a>`;
 
           new maplibregl.Popup()
             .setLngLat(coordinates)
@@ -194,7 +194,7 @@ function map() {
           const id = props.ShotID
           const direction = props.CameraID === "Fwd" ? "Forward" : props.CameraID === "Bwd" ? "Backward" : props.CameraID === "Left" ? "Left" : "Right";
           const popup = `<div class="text-2xl mb-2">${direction}</div>
-        <a class="text-lg" href="${props.S3URL}">${id}.tif</a>`;
+        <a class="text-lg" href="${props.S3URL}">${id}.tif</a><br> <a class="text-lg" target='_blank' href="view.html?file=${props.Filename}">Preview</a>`;
 
           new maplibregl.Popup()
             .setLngLat(coordinates)
@@ -209,7 +209,7 @@ function map() {
           const props = e.features[0].properties;
           const id = props.ShotID
           const popup = `<div class="text-2xl mb-2">Nadir</div>
-        <a class="text-lg" href="${props.S3URL}">${id}.tif</a>`;
+        <a class="text-lg" href="${props.S3URL}">${id}.tif</a><br> <a class="text-lg" target='_blank' href="view.html?file=${props.Filename}">Preview</a>`;
           new maplibregl.Popup()
             .setLngLat(coordinates)
             .setHTML(popup)
@@ -226,7 +226,7 @@ function map() {
           const dir = props.CameraID
           const popup = `<div class="text-2xl mb-1">${dir} centroid</div>
           <div class="text-lg mb-2">${date}</div>
-        <a class="text-lg" href="${props.S3URL}">${id}.tif</a>`;
+        <a class="text-lg" href="${props.S3URL}">${id}.tif</a><br> <a class="text-lg" target='_blank' href="view.html?file=${props.Filename}">Preview</a>`;
           new maplibregl.Popup()
             .setLngLat(coordinates)
             .setHTML(popup)
@@ -260,7 +260,8 @@ function map() {
               fl: props.FL,
               date: date,
               time: props.FlightTime,
-              file: props.Filename
+              file: props.Filename,
+              preview: `https://boydx.github.io/phase-3-oblique-centroids/view.html?file=${props.Filename}`
             },
             geometry: square.geometry
           };
@@ -271,7 +272,7 @@ function map() {
           });
 
           const popup = `
-          <div class="text-lg"><a class="text-lg" href="${props.S3URL}">${props.ShotID}.tif</a></div>
+          <div class="text-lg"><a class="text-lg" href="${props.S3URL}">${props.ShotID}.tif</a> | <a target='_blank' href="view.html?file=${props.Filename}">Preview</a></div>
         `;
           ui.imageForGeoJSON.innerHTML += `${popup}`;
 
@@ -388,19 +389,19 @@ function buildPopupContent(e) {
   const season = props.Season;
   const year = props.Year;
   const id = props.ShotID.split("_")
-  const color = `KY_KYAPED_${year}_Season${season} _3IN / Color_${id[1]}_${id[2]}.tif`;
-  const fwd = `KY_KYAPED_${year}_Season${season} _3IN / Fwd_${id[1]}_${id[2]}.tif`;
-  const bwd = `KY_KYAPED_${year}_Season${season} _3IN / Bwd_${id[1]}_${id[2]}.tif`;
-  const left = `KY_KYAPED_${year}_Season${season} _3IN / Left_${id[1]}_${id[2]}.tif`;
-  const right = `KY_KYAPED_${year}_Season${season} _3IN / Right_${id[1]}_${id[2]}.tif`;
+  const color = `KY_KYAPED_${year}_Season${season}_3IN/Color_${id[1]}_${id[2]}.tif`;
+  const fwd = `KY_KYAPED_${year}_Season${season}_3IN/Fwd_${id[1]}_${id[2]}.tif`;
+  const bwd = `KY_KYAPED_${year}_Season${season}_3IN/Bwd_${id[1]}_${id[2]}.tif`;
+  const left = `KY_KYAPED_${year}_Season${season}_3IN/Left_${id[1]}_${id[2]}.tif`;
+  const right = `KY_KYAPED_${year}_Season${season}_3IN/Right_${id[1]}_${id[2]}.tif`;
   const base = 'https://kyfromabove.s3.amazonaws.com/imagery/obliques/Phase3/'
   const popup1 = `
           <div class="text-xl mb-2 mt-2 ">KY_KYAPED_${year}_Season${season}_3IN</div>
-        Forward: <a href="${base}${fwd}" >Fwd_${id[1]}_${id[2]}.tif</a><br>
-            Backward: <a href="${base}${bwd}">Bwd_${id[1]}_${id[2]}.tif</a><br>
-            Left: <a href="${base}${left}">Left_${id[1]}_${id[2]}.tif</a><br>
-            Right: <a href="${base}${right}" >Right_${id[1]}_${id[2]}.tif</a><br>
-            Nadir: <a href="${base}${color}" >Color_${id[1]}_${id[2]}.tif</a><br>
+        Forward: <a href="${base}${fwd}" >Fwd_${id[1]}_${id[2]}.tif</a> | <a target='_blank' href="view.html?file=${fwd}">Preview</a><br>
+            Backward: <a href="${base}${bwd}">Bwd_${id[1]}_${id[2]}.tif</a> | <a target='_blank' href="view.html?file=${bwd}">Preview</a><br>
+            Left: <a href="${base}${left}">Left_${id[1]}_${id[2]}.tif</a> | <a target='_blank' href="view.html?file=${left}">Preview</a><br>
+            Right: <a href="${base}${right}" >Right_${id[1]}_${id[2]}.tif</a> | <a target='_blank' href="view.html?file=${right}">Preview</a><br>
+            Nadir: <a href="${base}${color}" >Color_${id[1]}_${id[2]}.tif</a> | <a target='_blank' href="view.html?file=${color}">Preview</a><br>
             `
   const popup = `
   <div class="text-2xl mb-2">${date} ${props.FlightTime}</div>
