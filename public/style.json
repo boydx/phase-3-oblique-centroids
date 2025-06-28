@@ -29,7 +29,7 @@
         },
         "on-points": {
             "type": "vector",
-            "url": "pmtiles://https://nyc3.digitaloceanspaces.com/astoria/tiles/phase3-obliques/centroids.pmtiles"
+            "url": "pmtiles://https://nyc3.digitaloceanspaces.com/astoria/tiles/phase3-obliques/centroids_camera_directions.pmtiles"
         },
         "frames": {
             "type": "geojson",
