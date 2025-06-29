@@ -6,123 +6,151 @@
     "x": 0,
     "y": 0
   },
-  "east-green": {
+  "e-pink-30": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
     "x": 0,
     "y": 512
+  },
+  "east-green": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 0,
+    "y": 1024
   },
   "east-red": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
     "x": 0,
-    "y": 1024
+    "y": 1536
   },
   "east-west": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
-    "x": 0,
-    "y": 1536
+    "x": 512,
+    "y": 0
   },
   "logo-phase-3": {
     "height": 423,
     "pixelRatio": 1,
     "width": 483,
-    "x": 2560,
-    "y": 0
+    "x": 2048,
+    "y": 1024
   },
   "n-green-30": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
     "x": 512,
-    "y": 0
+    "y": 512
+  },
+  "n-pink-30": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 512,
+    "y": 1024
   },
   "north-blue": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
     "x": 512,
-    "y": 512
+    "y": 1536
   },
   "north-bound": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
-    "x": 512,
-    "y": 1024
+    "x": 1024,
+    "y": 0
   },
   "north-south": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
-    "x": 512,
-    "y": 1536
+    "x": 1024,
+    "y": 512
   },
   "north-yellow": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
     "x": 1024,
-    "y": 0
+    "y": 1024
   },
   "s-green-30": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
     "x": 1024,
-    "y": 512
+    "y": 1536
+  },
+  "s-pink-30": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 1536,
+    "y": 0
   },
   "selected-plane": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
-    "x": 1024,
-    "y": 1024
+    "x": 1536,
+    "y": 512
   },
   "south-blue": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
-    "x": 1024,
-    "y": 1536
+    "x": 1536,
+    "y": 1024
   },
   "south-bound": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
     "x": 1536,
-    "y": 0
+    "y": 1536
   },
   "south-yellow": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
-    "x": 1536,
-    "y": 512
+    "x": 2048,
+    "y": 0
   },
   "w-green-30": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
-    "x": 1536,
-    "y": 1024
+    "x": 2560,
+    "y": 0
+  },
+  "w-pink-30": {
+    "height": 512,
+    "pixelRatio": 1,
+    "width": 512,
+    "x": 3072,
+    "y": 0
   },
   "west-green": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
-    "x": 1536,
-    "y": 1536
+    "x": 3584,
+    "y": 0
   },
   "west-red": {
     "height": 512,
     "pixelRatio": 1,
     "width": 512,
     "x": 2048,
-    "y": 0
+    "y": 512
   }
 }

@@ -42,10 +42,13 @@
           exposure button to zoom and center the map to the exposure.
         </div>
         <div class="mb-2">
-          Alternatively, you can toggle all oblique image centroids. When you click a centroid, a polygon will appear
-          representing a 600-meter square centered on the centroid. The squares show the 'active frame extent' of the
-          oblique imagery, useful for understanding its coverage in a specific area. You can download the GeoJSON file
-          containing the polygons with metadata, e.g., links to images.
+          Alternatively, zoom into the map and toggle all oblique image centroids. The centroid icon indicates camera's
+          bearing,
+          useful for understanding its coverage in a specific area. When you click an icon, a 600-meter-square polygon
+          is generated
+          around the centroid, representing the minimum extent shown in the oblique image. You can download a GeoJSON
+          file
+          containing all generated polygons and metadata, e.g., links to images.
         </div>
         <div class="mb-2">
           <div class="mb-1 font-semibold">
@@ -81,7 +84,7 @@
         </div>
         <button id="download-geojson"
           class="font-semibold bg-green-600 text-white px-4 py-2 rounded hover:bg-green-900">
-          Download frames GeoJSON
+          Download polygons GeoJSON
         </button>
       </div>
     </div>
@@ -120,9 +123,15 @@
           images. GeoPackages of image frame centroids are hosted on KyFromAbove AWS page.
         </div>
         <div class="mb-2">
-          The point locations were
-          merged into a single GeoPackage, converted to a geoJSON using ogr2ogr, and encoded as a vector tile layer with
-          Tippecanoe for PMTiles. This methodology is documented and explored in the MAP 675 course at the UKy's Digital
+          To find each plane's flight direction, and thus the cardinal direction each camera faces, the Kappa value for
+          the forward
+          exposure was used. If the Kappa value was around 0&deg;, the plane was flying north. If it was around 180&deg;
+          or -180&deg;, the plane was flying south.
+        </div>
+        <div class="mb-2">
+          The centroid locations were
+          merged into a single layer, converted to a geoJSON using ogr2ogr, and encoded as a vector tile layer with
+          Tippecanoe and PMTiles. This methodology is documented and explored in the MAP 675 course at the UKy's Digital
           Mapping program.
         </div>
         <div class="mb-2">

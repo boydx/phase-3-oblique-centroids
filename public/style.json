@@ -278,7 +278,7 @@
             ],
             "layout": {
                 "icon-anchor": "center",
-                "icon-allow-overlap": false,
+                "icon-allow-overlap": true,
                 "icon-image": "south-bound",
                 "visibility": "visible",
                 "icon-size": [
@@ -289,14 +289,12 @@
                     [
                         "zoom"
                     ],
-                    5,
-                    0.001,
                     10,
-                    0.02,
-                    15,
-                    0.05,
-                    20,
-                    0.15
+                    0,
+                    12,
+                    0.03,
+                    17,
+                    0.1
                 ]
             }
         },
@@ -327,7 +325,7 @@
             "layout": {
                 "icon-anchor": "center",
                 "icon-image": "north-bound",
-                "icon-allow-overlap": false,
+                "icon-allow-overlap": true,
                 "visibility": "visible",
                 "icon-size": [
                     "interpolate",
@@ -337,14 +335,12 @@
                     [
                         "zoom"
                     ],
-                    5,
-                    0.001,
                     10,
-                    0.02,
-                    15,
-                    0.05,
-                    20,
-                    0.15
+                    0,
+                    12,
+                    0.03,
+                    17,
+                    0.1
                 ]
             }
         },
@@ -381,7 +377,7 @@
             ],
             "layout": {
                 "icon-anchor": "center",
-                "icon-allow-overlap": false,
+                "icon-allow-overlap": true,
                 "icon-image": [
                     "case",
                     [
@@ -450,7 +446,7 @@
             ],
             "layout": {
                 "icon-anchor": "center",
-                "icon-allow-overlap": false,
+                "icon-allow-overlap": true,
                 "icon-image": [
                     "case",
                     [
@@ -546,7 +542,7 @@
                         ],
                         "East"
                     ],
-                    "e-green-30",
+                    "e-pink-30",
                     [
                         "==",
                         [
@@ -555,7 +551,7 @@
                         ],
                         "West"
                     ],
-                    "w-green-30",
+                    "w-pink-30",
                     [
                         "==",
                         [
@@ -564,11 +560,25 @@
                         ],
                         "North"
                     ],
-                    "n-green-30",
-                    "s-green-30"
+                    "n-pink-30",
+                    "s-pink-30"
                 ],
                 "visibility": "none",
-                "icon-size": 0.1
+                "icon-size": [
+                    "interpolate",
+                    [
+                        "linear"
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    12,
+                    0,
+                    14,
+                    0.05,
+                    17,
+                    0.1
+                ]
             }
         }
     ]

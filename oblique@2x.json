@@ -6,123 +6,151 @@
     "x": 0,
     "y": 0
   },
-  "east-green": {
+  "e-pink-30": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
     "x": 0,
     "y": 1024
+  },
+  "east-green": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 0,
+    "y": 2048
   },
   "east-red": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
     "x": 0,
-    "y": 2048
+    "y": 3072
   },
   "east-west": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
-    "x": 0,
-    "y": 3072
+    "x": 1024,
+    "y": 0
   },
   "logo-phase-3": {
     "height": 846,
     "pixelRatio": 2,
     "width": 966,
-    "x": 5120,
-    "y": 0
+    "x": 4096,
+    "y": 2048
   },
   "n-green-30": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
     "x": 1024,
-    "y": 0
+    "y": 1024
+  },
+  "n-pink-30": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 1024,
+    "y": 2048
   },
   "north-blue": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
     "x": 1024,
-    "y": 1024
+    "y": 3072
   },
   "north-bound": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
-    "x": 1024,
-    "y": 2048
+    "x": 2048,
+    "y": 0
   },
   "north-south": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
-    "x": 1024,
-    "y": 3072
+    "x": 2048,
+    "y": 1024
   },
   "north-yellow": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
     "x": 2048,
-    "y": 0
+    "y": 2048
   },
   "s-green-30": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
     "x": 2048,
-    "y": 1024
+    "y": 3072
+  },
+  "s-pink-30": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 3072,
+    "y": 0
   },
   "selected-plane": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
-    "x": 2048,
-    "y": 2048
+    "x": 3072,
+    "y": 1024
   },
   "south-blue": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
-    "x": 2048,
-    "y": 3072
+    "x": 3072,
+    "y": 2048
   },
   "south-bound": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
     "x": 3072,
-    "y": 0
+    "y": 3072
   },
   "south-yellow": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
-    "x": 3072,
-    "y": 1024
+    "x": 4096,
+    "y": 0
   },
   "w-green-30": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
-    "x": 3072,
-    "y": 2048
+    "x": 5120,
+    "y": 0
+  },
+  "w-pink-30": {
+    "height": 1024,
+    "pixelRatio": 2,
+    "width": 1024,
+    "x": 6144,
+    "y": 0
   },
   "west-green": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
-    "x": 3072,
-    "y": 3072
+    "x": 7168,
+    "y": 0
   },
   "west-red": {
     "height": 1024,
     "pixelRatio": 2,
     "width": 1024,
     "x": 4096,
-    "y": 0
+    "y": 1024
   }
 }

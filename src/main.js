@@ -32,8 +32,8 @@ function map() {
         container: "map",
         name: "Phase 3 Oblique Centroids",
         hash: true,
-        zoom: 10.66,
-        center: [-84.0183, 37.4145],
+        zoom: 12.68,
+        center: [-84.50242, 38.03115],
         maxZoom: 22,
         maxPitch: 85,
         attributionControl: false,
@@ -301,6 +301,9 @@ function map() {
           map.setLayoutProperty("obliques-south", "visibility", "none");
           map.setLayoutProperty("frame-fill", "visibility", "visible");
           map.setLayoutProperty("frame-stroke", "visibility", "visible");
+          map.setLayoutProperty('selected-plane', 'visibility', 'none');
+          map.setLayoutProperty('obliques-north-images', 'visibility', 'none');
+          map.setLayoutProperty('obliques-south-images', 'visibility', 'none');
         } else {
           map.setLayoutProperty("all-oblique-centroids", "visibility", "none");
           ui.centroids.classList.remove("active");
@@ -308,6 +311,7 @@ function map() {
           map.setLayoutProperty("obliques-south", "visibility", "visible");
           map.setLayoutProperty("frame-fill", "visibility", "none");
           map.setLayoutProperty("frame-stroke", "visibility", "none");
+
         }
       });
 
@@ -419,7 +423,7 @@ function buildPopupContent(e) {
   const popup = `
   <div class="text-2xl mb-2">${date} ${props.FlightTime}</div>
   <div class="text-lg mb-4">
-  ${flightDir} bound<br>
+  ${flightDir}bound<br>
   Flight: ${id[1]}<br>
   Shot: ${id[2]}<br>
   ID: ${id[1]}_${id[2]}</div>
