@@ -8,7 +8,7 @@
     <style>
         body {
             margin: 0;
-            padding: 0;
+            padding: 10px;
             font-family: monospace, sans-serif;
             color: #333;
             background-color: #7e7e7e;
@@ -47,7 +47,20 @@
             transform: translateY(1px);
         }
 
+        a,
+        a:visited {
+            color: #0d542b;
+            text-decoration: underline;
+        }
 
+        a:hover {
+            color: #45a049;
+            text-decoration: none;
+        }
+
+        a:active {
+            color: #3e8e41;
+        }
 
         @media (max-width: 600px) {
             body {
@@ -58,7 +71,7 @@
 </head>
 
 <body>
-    <a target="_blank" id="preview" style="display:none" href="#">Waiting...</a>
+    <a target="_blank" id="preview" style="display:none" href="#">Loading...</a>
     <div id="info"></div>
     <!-- containers for building JPEG preview -->
     <canvas id="geotiffCanvas" style="display:none"></canvas>
@@ -81,20 +94,20 @@
                 params[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1] || '');
             }
             document.title = params.file.split('/')[1]
-            ui.info.innerHTML = `Loading file: ${params.file}<br>This may take a few seconds...<br>`;
+            ui.info.innerHTML = `${params.file.split("/")[0]}<br>${params.file.split("/")[1]}<br>This will take a few seconds...<br>`;
             return `https://kyfromabove.s3.amazonaws.com/imagery/obliques/Phase3/${params.file}`;
         }
 
         async function loadAndRenderGeoTIFF(url, canvasId) {
             const maxWidth = 4000;
             try {
-                const info = document.getElementById('info');
                 const tiff = await GeoTIFF.fromUrl(url);
                 const image = await tiff.getImage();
-                info.innerHTML += "COG TIFF successfully found.<br>";
+                ui.info.innerHTML += "COG TIFF successfully found.<br>";
                 const width = image.getWidth();
                 const height = image.getHeight();
-                info.innerHTML += `Original dimensions: ${width} x ${height} pixels.<br>`;
+                ui.info.innerHTML += `Original dimensions: ${width} x ${height} pixels.<br>
+                <a href="${url}" target="_blank">Download original TIFF</a><br>`;
                 let targetWidth = width;
                 let targetHeight = height;
                 if (width > maxWidth) {
@@ -102,7 +115,7 @@
                     targetWidth = maxWidth;
                     targetHeight = Math.round(height * scale);
                 }
-                info.innerHTML += `Preview dimensions: ${targetWidth} x ${targetHeight} pixels.<br>`;
+                ui.info.innerHTML += `Preview dimensions: ${targetWidth} x ${targetHeight} pixels.<br>`;
                 ui.preview.style.display = 'block';
                 const raster = await image.readRGB();
                 const origin = image.getOrigin();
@@ -143,7 +156,7 @@
                 }, 'image/jpeg', 0.9);
 
             } catch (error) {
-                console.error("Error loading or rendering GeoTIFF:", error);
+                ui.info.innerHTML += `Error loading or rendering GeoTIFF: ${error.message}<br>`;
             }
         }
         const url = getUrlParams()

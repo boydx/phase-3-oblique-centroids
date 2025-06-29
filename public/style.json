@@ -58,6 +58,10 @@
             "type": "vector",
             "url": "pmtiles://https://contig.us/data/pmtiles/ky-counties.pmtiles"
         },
+        "county-labels": {
+            "type": "vector",
+            "url": "pmtiles://https://nyc3.digitaloceanspaces.com/astoria/tiles/vector/us-county-centroids.pmtiles"
+        },
         "mask": {
             "type": "vector",
             "url": "pmtiles://https://contig.us/data/pmtiles/mask.pmtiles"
@@ -219,6 +223,40 @@
             }
         },
         {
+            "id": "counties-line-case",
+            "type": "line",
+            "source": "counties",
+            "source-layer": "counties",
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round"
+            },
+            "paint": {
+                "line-color": "#333",
+                "line-opacity": 0.8,
+                "line-width": {
+                    "stops": [
+                        [
+                            1,
+                            0
+                        ],
+                        [
+                            6,
+                            0
+                        ],
+                        [
+                            8,
+                            2
+                        ],
+                        [
+                            11,
+                            3
+                        ]
+                    ]
+                }
+            }
+        },
+        {
             "id": "counties-line",
             "type": "line",
             "source": "counties",
@@ -228,7 +266,7 @@
                 "line-join": "round"
             },
             "paint": {
-                "line-color": "#666",
+                "line-color": "#ccc",
                 "line-opacity": 1,
                 "line-width": {
                     "stops": [
@@ -247,6 +285,89 @@
                         [
                             11,
                             2
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "id": "county-labels",
+            "type": "symbol",
+            "source": "county-labels",
+            "source-layer": "county-centroids",
+            "filter": [
+                "==",
+                [
+                    "slice",
+                    [
+                        "get",
+                        "GEOID10"
+                    ],
+                    0,
+                    2
+                ],
+                "21"
+            ],
+            "layout": {
+                "text-transform": "uppercase",
+                "text-max-width": 8,
+                "text-allow-overlap": true,
+                "text-letter-spacing": 0.1,
+                "text-field": [
+                    "get",
+                    "NAMELSAD10"
+                ],
+                "text-font": [
+                    "Open Sans Bold"
+                ],
+                "text-size": {
+                    "stops": [
+                        [
+                            6,
+                            6
+                        ],
+                        [
+                            7,
+                            7
+                        ],
+                        [
+                            8,
+                            10
+                        ],
+                        [
+                            11,
+                            15
+                        ]
+                    ]
+                },
+                "symbol-placement": "point"
+            },
+            "paint": {
+                "text-color": "#ccc",
+                "text-halo-color": "#333",
+                "text-halo-width": 0.4,
+                "text-halo-blur": 1,
+                "text-opacity": {
+                    "stops": [
+                        [
+                            0,
+                            0
+                        ],
+                        [
+                            6.4,
+                            0
+                        ],
+                        [
+                            6.5,
+                            1
+                        ],
+                        [
+                            11.9,
+                            1
+                        ],
+                        [
+                            12,
+                            0
                         ]
                     ]
                 }
@@ -289,7 +410,7 @@
                     [
                         "zoom"
                     ],
-                    10,
+                    11.9,
                     0,
                     12,
                     0.03,
@@ -335,7 +456,7 @@
                     [
                         "zoom"
                     ],
-                    10,
+                    11.9,
                     0,
                     12,
                     0.03,
