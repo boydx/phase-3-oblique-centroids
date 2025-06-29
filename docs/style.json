@@ -29,7 +29,7 @@
         },
         "on-points": {
             "type": "vector",
-            "url": "pmtiles://https://nyc3.digitaloceanspaces.com/astoria/tiles/phase3-obliques/centroids.pmtiles"
+            "url": "pmtiles://https://nyc3.digitaloceanspaces.com/astoria/tiles/phase3-obliques/centroids_camera_directions.pmtiles"
         },
         "frames": {
             "type": "geojson",
@@ -262,17 +262,10 @@
                 [
                     "==",
                     [
-                        "%",
-                        [
-                            "to-number",
-                            [
-                                "get",
-                                "FL"
-                            ]
-                        ],
-                        2
+                        "get",
+                        "FlightDirection"
                     ],
-                    0
+                    "South"
                 ],
                 [
                     "==",
@@ -285,7 +278,7 @@
             ],
             "layout": {
                 "icon-anchor": "center",
-                "icon-allow-overlap": false,
+                "icon-allow-overlap": true,
                 "icon-image": "south-bound",
                 "visibility": "visible",
                 "icon-size": [
@@ -296,14 +289,12 @@
                     [
                         "zoom"
                     ],
-                    5,
-                    0.001,
                     10,
-                    0.02,
-                    15,
-                    0.05,
-                    20,
-                    0.15
+                    0,
+                    12,
+                    0.03,
+                    17,
+                    0.1
                 ]
             }
         },
@@ -315,19 +306,12 @@
             "filter": [
                 "all",
                 [
-                    "!=",
+                    "==",
                     [
-                        "%",
-                        [
-                            "to-number",
-                            [
-                                "get",
-                                "FL"
-                            ]
-                        ],
-                        2
+                        "get",
+                        "FlightDirection"
                     ],
-                    0
+                    "North"
                 ],
                 [
                     "==",
@@ -341,7 +325,7 @@
             "layout": {
                 "icon-anchor": "center",
                 "icon-image": "north-bound",
-                "icon-allow-overlap": false,
+                "icon-allow-overlap": true,
                 "visibility": "visible",
                 "icon-size": [
                     "interpolate",
@@ -351,14 +335,12 @@
                     [
                         "zoom"
                     ],
-                    5,
-                    0.001,
                     10,
-                    0.02,
-                    15,
-                    0.05,
-                    20,
-                    0.15
+                    0,
+                    12,
+                    0.03,
+                    17,
+                    0.1
                 ]
             }
         },
@@ -395,7 +377,7 @@
             ],
             "layout": {
                 "icon-anchor": "center",
-                "icon-allow-overlap": false,
+                "icon-allow-overlap": true,
                 "icon-image": [
                     "case",
                     [
@@ -464,7 +446,7 @@
             ],
             "layout": {
                 "icon-anchor": "center",
-                "icon-allow-overlap": false,
+                "icon-allow-overlap": true,
                 "icon-image": [
                     "case",
                     [
@@ -533,7 +515,7 @@
         },
         {
             "id": "all-oblique-centroids",
-            "type": "circle",
+            "type": "symbol",
             "source": "on-points",
             "source-layer": "centroids",
             "filter": [
@@ -548,10 +530,41 @@
                 ]
             ],
             "layout": {
-                "visibility": "none"
-            },
-            "paint": {
-                "circle-radius": [
+                "icon-anchor": "center",
+                "icon-allow-overlap": true,
+                "icon-image": [
+                    "case",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "CameraDirection"
+                        ],
+                        "East"
+                    ],
+                    "e-pink-30",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "CameraDirection"
+                        ],
+                        "West"
+                    ],
+                    "w-pink-30",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "CameraDirection"
+                        ],
+                        "North"
+                    ],
+                    "n-pink-30",
+                    "s-pink-30"
+                ],
+                "visibility": "none",
+                "icon-size": [
                     "interpolate",
                     [
                         "linear"
@@ -559,18 +572,13 @@
                     [
                         "zoom"
                     ],
-                    5,
+                    12,
                     0,
-                    10,
-                    1,
-                    15,
-                    5,
-                    20,
-                    10
-                ],
-                "circle-color": "rgba(236, 0, 140,0.2)",
-                "circle-stroke-color": "rgb(236, 0, 140)",
-                "circle-stroke-width": 2
+                    14,
+                    0.05,
+                    17,
+                    0.1
+                ]
             }
         }
     ]
