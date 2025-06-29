@@ -176,8 +176,9 @@ function map() {
           const coordinates = e.features[0].geometry.coordinates;
           const props = e.features[0].properties;
           const id = props.ShotID
+          const camDir = props.CameraDirection;
           const direction = props.CameraID === "Fwd" ? "Forward" : props.CameraID === "Bwd" ? "Backward" : props.CameraID === "Left" ? "Left" : "Right";
-          const popup = `<div class="text-2xl mb-2">${direction}</div>
+          const popup = `<div class="text-2xl mb-2">${direction} (${camDir})</div>
         <a class="text-lg" href="${props.S3URL}">${id}.tif</a> <br> <a class="text-lg" target='_blank' href="view.html?file=${props.Filename}">Preview</a>`;
 
           new maplibregl.Popup()
@@ -192,8 +193,9 @@ function map() {
           const coordinates = e.features[0].geometry.coordinates;
           const props = e.features[0].properties;
           const id = props.ShotID
+          const camDir = props.CameraDirection;
           const direction = props.CameraID === "Fwd" ? "Forward" : props.CameraID === "Bwd" ? "Backward" : props.CameraID === "Left" ? "Left" : "Right";
-          const popup = `<div class="text-2xl mb-2">${direction}</div>
+          const popup = `<div class="text-2xl mb-2">${direction} (${camDir})</div>
         <a class="text-lg" href="${props.S3URL}">${id}.tif</a><br> <a class="text-lg" target='_blank' href="view.html?file=${props.Filename}">Preview</a>`;
 
           new maplibregl.Popup()
@@ -224,7 +226,8 @@ function map() {
           const date = new Date(props.FlightDate).toLocaleDateString();
           const id = props.ShotID
           const dir = props.CameraID
-          const popup = `<div class="text-2xl mb-1">${dir} centroid</div>
+          const camDir = props.CameraDirection;
+          const popup = `<div class="text-2xl mb-1">Bearing ${camDir}</div>
           <div class="text-lg mb-2">${date}</div>
         <a class="text-lg" href="${props.S3URL}">${id}.tif</a><br> <a class="text-lg" target='_blank' href="view.html?file=${props.Filename}">Preview</a>`;
           new maplibregl.Popup()
@@ -243,6 +246,8 @@ function map() {
           const id = `${id1[1]}_${id1[2]}`;
           const url = props.S3URL;
           const dir = props.CameraID
+          const camDir = props.CameraDirection;
+          const flightDir = props.FlightDirection;
           const point = turf.point(coordinates);
           const buffered = turf.buffer(point, 300, { units: 'meters' }); // 0.25km radius = 0.5km diameter
           const bbox = turf.bbox(buffered);
@@ -250,9 +255,12 @@ function map() {
           const squareFeature = {
             type: 'Feature',
             properties: {
-              type: 'active oblique frame boundary',
+              type: 'Active oblique frame boundary',
+              source: 'KyFromAbove, UKy Geography, Boyd Shearer',
               id: id,
-              centroid: coordinates,
+              lat: coordinates[1],
+              lon: coordinates[0],
+              latLng: [coordinates[1], coordinates[0]],
               season: props.Season,
               year: props.Year,
               dir: dir,
@@ -260,6 +268,8 @@ function map() {
               fl: props.FL,
               date: date,
               time: props.FlightTime,
+              flightDirection: flightDir,
+              cameraDirection: camDir,
               file: props.Filename,
               preview: `https://boydx.github.io/phase-3-oblique-centroids/view.html?file=${props.Filename}`
             },
@@ -272,7 +282,7 @@ function map() {
           });
 
           const popup = `
-          <div class="text-lg"><a class="text-lg" href="${props.S3URL}">${props.ShotID}.tif</a> | <a target='_blank' href="view.html?file=${props.Filename}">Preview</a></div>
+          <div class="text-lg">Bearing ${camDir} | <a class="text-lg" href="${props.S3URL}">${props.ShotID}.tif</a> | <a target='_blank' href="view.html?file=${props.Filename}">Preview</a></div>
         `;
           ui.imageForGeoJSON.innerHTML += `${popup}`;
 
@@ -389,6 +399,9 @@ function buildPopupContent(e) {
   const season = props.Season;
   const year = props.Year;
   const id = props.ShotID.split("_")
+  const flightDir = props.FlightDirection;
+  const cameraDir = props.CameraDirection;
+  const type = props.CameraID
   const color = `KY_KYAPED_${year}_Season${season}_3IN/Color_${id[1]}_${id[2]}.tif`;
   const fwd = `KY_KYAPED_${year}_Season${season}_3IN/Fwd_${id[1]}_${id[2]}.tif`;
   const bwd = `KY_KYAPED_${year}_Season${season}_3IN/Bwd_${id[1]}_${id[2]}.tif`;
@@ -405,7 +418,9 @@ function buildPopupContent(e) {
             `
   const popup = `
   <div class="text-2xl mb-2">${date} ${props.FlightTime}</div>
-  <div class="text-lg mb-4">Flight: ${id[1]}<br>
+  <div class="text-lg mb-4">
+  ${flightDir} bound<br>
+  Flight: ${id[1]}<br>
   Shot: ${id[2]}<br>
   ID: ${id[1]}_${id[2]}</div>
   `

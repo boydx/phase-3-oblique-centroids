@@ -262,17 +262,10 @@
                 [
                     "==",
                     [
-                        "%",
-                        [
-                            "to-number",
-                            [
-                                "get",
-                                "FL"
-                            ]
-                        ],
-                        2
+                        "get",
+                        "FlightDirection"
                     ],
-                    0
+                    "South"
                 ],
                 [
                     "==",
@@ -315,19 +308,12 @@
             "filter": [
                 "all",
                 [
-                    "!=",
+                    "==",
                     [
-                        "%",
-                        [
-                            "to-number",
-                            [
-                                "get",
-                                "FL"
-                            ]
-                        ],
-                        2
+                        "get",
+                        "FlightDirection"
                     ],
-                    0
+                    "North"
                 ],
                 [
                     "==",
@@ -533,7 +519,7 @@
         },
         {
             "id": "all-oblique-centroids",
-            "type": "circle",
+            "type": "symbol",
             "source": "on-points",
             "source-layer": "centroids",
             "filter": [
@@ -548,29 +534,41 @@
                 ]
             ],
             "layout": {
-                "visibility": "none"
-            },
-            "paint": {
-                "circle-radius": [
-                    "interpolate",
+                "icon-anchor": "center",
+                "icon-allow-overlap": true,
+                "icon-image": [
+                    "case",
                     [
-                        "linear"
+                        "==",
+                        [
+                            "get",
+                            "CameraDirection"
+                        ],
+                        "East"
                     ],
+                    "e-green-30",
                     [
-                        "zoom"
+                        "==",
+                        [
+                            "get",
+                            "CameraDirection"
+                        ],
+                        "West"
                     ],
-                    5,
-                    0,
-                    10,
-                    1,
-                    15,
-                    5,
-                    20,
-                    10
+                    "w-green-30",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "CameraDirection"
+                        ],
+                        "North"
+                    ],
+                    "n-green-30",
+                    "s-green-30"
                 ],
-                "circle-color": "rgba(236, 0, 140,0.2)",
-                "circle-stroke-color": "rgb(236, 0, 140)",
-                "circle-stroke-width": 2
+                "visibility": "none",
+                "icon-size": 0.1
             }
         }
     ]
