@@ -5,3 +5,9 @@ https://services.arcgis.com/vQ8kO5zdqETeirEL/ArcGIS/rest/services/Phase_3_obliqu
 https://services.arcgis.com/vQ8kO5zdqETeirEL/ArcGIS/rest/services/Phase_3_oblique_image_centroids/FeatureServer/0/query?f=geojson&geometry=-84.5,38.0&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelWithin&distance=1000&units=esriSRUnit_Foot&outFields=*&returnGeometry=true
 
 https://services.arcgis.com/vQ8kO5zdqETeirEL/ArcGIS/rest/services/Phase_3_oblique_image_centroids/FeatureServer/0/query?f=geojson&geometry=-84.501,37.999,-84.499,38.001&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects&inSR=4326&outFields=*&returnGeometry=true&resultRecordCount=10
+
+
+["all", ["!=", ["%", ["to-number", ["get", "FL"]], 2], 0], ["=!", ["get", "CameraID"], "Color"]]
+
+["==", ["get", "CameraID"], "Color"]
+["match", ["get", "CameraID"], "Color"]
