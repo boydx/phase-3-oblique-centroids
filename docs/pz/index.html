@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Obliques: An open approach</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Edu+SA+Beginner:wght@400..700&display=swap"
+        rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="https://uky-gis.github.io/geo509/slides/dist/reset.css" />
+    <link rel="stylesheet" href="https://uky-gis.github.io/geo509/slides/dist/reveal.css" />
+    <link rel="stylesheet" href="https://uky-gis.github.io/geo509/slides/dist/theme/league-109.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="https://uky-gis.github.io/geo509/slides/dist/plugin/highlight/zenburn.css"
+        id="highlight-theme" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div class="reveal">
+        <!-- <div class="top-module">
+            <a target='_blank' href="https://github.com/boydx/inside-outside">Repo</a>
+        </div> -->
+        <div class="slides">
+            <section data-pre-load
+                data-background-image="https://www.outragegis.com/weather/img/animation/yesterday/Dome.gif"
+                data-background-opacity="0.4">
+                <span class="title-font">Obliques</span>
+                <h5>An open approach</h5>
+                <h4>@<a href="https://boyd.xyz/i" target="_blank">boyd.xyz/a</a></h4>
+                <!-- <h2>Welcome</h2> -->
+                <div class="ll" style="opacity:60%;">
+                    Kuwohi (Clingmans Dome), 6,644 ft <br />
+                    Yesterday in the Great Smokies<br />Webcam
+                    <a href="https://www.outragegis.com/weather/img/animation" target="_blank">archive</a>
+                </div>
+                <div class='lr'>Ky GIS Conference, September 25, 2025</div>
+            </section>
+            <section data-pre-load
+                data-background-image="https://www.outragegis.com/weather/img/animation/yesterday/Dome.gif"
+                data-background-opacity="0.4">
+                <img width="100%" src="https://uky-gis.github.io/geo509/slides/images/logo-uk-geo.png" />
+
+            </section>
+            <section class='left'
+                data-background-image='https://www.outragegis.com/weather/img/animation/yesterday/Dome.gif'
+                data-background-opacity="0.2">
+                <h3>Boyd Shearer</h3>
+                <ul>
+                    <li class='fragment'>
+                        Senior Lecturer, UKy Geography <a href="https://geography.as.uky.edu/users/blshea1"
+                            target="_blank">🔗</a>
+                    </li>
+                    <li class='fragment'>
+                        Assistant Director, Ky DGI (late October) <a href="https://dgi.ky.gov" target="_blank">🔗</a>
+                    </li>
+                    <li class='fragment'>
+                        outrageGIS mapping <a href="https://www.outragegis.com" target="_blank">🔗</a>
+                    </li>
+                </ul>
+            </section>
+            <section data-pre-load
+                data-background-image="https://www.outragegis.com/weather/img/animation/yesterday/Dome.gif"
+                data-background-opacity="1">
+                <h1 class="fragment">Kuhowi <a class="fragment" style="font-size:7rem;"
+                        href="https://www.nps.gov/grsm/learn/photosmultimedia/webcams.htm" target="_blank">🔗</a></h1>
+            </section>
+
+
+
+            <section data-background-image='./images/city-country.jpg' data-background-opacity="0.6">
+                <span class="title-slide-font">City & Country</h3>
+
+            </section>
+
+            <section class='left' data-background-iframe='./map/?location=dp' data-background-opacity="1">
+            </section>
+
+            <section class='left' data-background-opacity="1">
+                <blockquote>
+                    Fred Douglass Park, the first public park for colored people ever opened in Lexington, was dedicated
+                    yesterday afternoon with elaborate exercises, preceded by a parade fully a mile in length and
+                    managed entirely by the committee of colored citizens appointed to arrange for the celebration. A
+                    crowd estimated at 5,000 filled the park and heard the program of addresses and music which had been
+                    arranged...<br>(Herald: July 5, 1916, p.8 C-4)
+                </blockquote>
+
+            </section>
+
+            <section class='left' data-background-size="contain"
+                data-background-image='https://live.staticflickr.com/7459/27624779985_8eff207efd_o.jpg'
+                data-background-opacity="1">
+            </section>
+
+            <section class='left' data-background-opacity="1">
+                <blockquote style="font-size: 0.8em; line-height: 1.3em;padding:1rem;">
+                    The Park Minstrels [show] ... will be given at Woodland Park Auditorium. Singing, dancing and
+                    fun-making with all the atmosphere of the old-time minstrel show, will be presented.... In order
+                    that everyone may enjoy the antics of ‘Mr. Bones’ and ‘Mr. Interlocutor,’ together with their
+                    tap-dancing and mammy singing cohorts, all activity at the Lexington playgrounds will be suspended
+                    Tuesday night.... The Park Minstrels is expected to be one the most elaborate undertakings that
+                    playgrounds have presented. <br>(Herald and Leader: August 10, 1930)
+                </blockquote>
+
+            </section>
+
+            <section class='left' data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/golf.jpg'>
+            </section>
+
+
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/douglass-park-1930.jpg'>
+                <div class="fragment fade-out center image-title">
+                    <h3>Douglass Park, 1930</h3>
+                </div>
+            </section>
+
+            <section class='left' data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/baseball.jpg'>
+            </section>
+
+            <section class='left' data-background-opacity="1" data-background-size="contain"
+                data-background-image='https://live.staticflickr.com/7087/27014294914_e73c7344c0_k.jpg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/douglass-park-02.jpg'>
+                <div class="fragment fade-out center image-title">
+                    <h3>Douglass Park, Feb, 2024</h3>
+                </div>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/douglass-park-01.jpeg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/cy-park-01.jpg'>
+                <div class="fragment fade-out center image-title">
+                    <h3>Charles Young Community Center</h3>
+                    <h4>Lexington, 1934</h4>
+                </div>
+            </section>
+
+            <section class='left' data-background-opacity="1" data-background-size="contain"
+                data-background-image='https://live.staticflickr.com/7279/27015787443_735d398ee0_h.jpg'>
+            </section>
+            <section class='left' data-background-opacity="1" data-background-size="contain"
+                data-background-image='https://live.staticflickr.com/7576/27624815355_a38fe023f2_h.jpg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/chickasaw.jpeg'>
+                <div class="fragment fade-out center image-title">
+                    <h3>Chickasaw Park</h3>
+                    <h4>Louisville, 1924</h4>
+                </div>
+            </section>
+
+            <section class='left' data-background-opacity="1">
+                <blockquote style="font-size: 0.8em; line-height: 1.3em;padding:1rem;">
+                    All public parks ... established and
+                    maintained for the recreation, pleasure and welfare of the
+                    colored population in cities of the second class shall be held,
+                    managed and controlled by a “Board of Park Commissioners
+                    (Colored)” of the city wherein the parks are located.<br>(Kentucky Revised Statues; chapter 97.400,
+                    1942.)
+                </blockquote>
+
+            </section>
+
+            <section class='left' data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/ky-map.jpg'>
+            </section>
+
+
+
+            <section class='left' data-background-opacity="1"
+                data-background-iframe='https://www.youtube.com/embed/g-ve2vtImUc?si=7Q3CnWFK9r_wn1y'>
+            </section>
+
+
+            <section class='left' data-background-iframe='./map/?location=csp' data-background-opacity="1">
+            </section>
+
+            <section data-background-opacity="1" data-background-size="cover"
+                data-background-image='./images/csp-kids.jpg'>
+                <div class="fragment fade-out center image-title">
+                    <h3>Cherokee State Park</h3>
+                    <h4>Hardin, Ky, 1950s</h4>
+                </div>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="cover"
+                data-background-image='./images/csp-bathhouse.jpg'>
+            </section>
+
+            <section class='left' data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/csp-01.jpeg'>
+            </section>
+
+            <section class='left' data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/csp-02.jpeg'>
+            </section>
+
+            <section class='left' data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/csp-03.jpg'>
+            </section>
+
+
+            <section class='left' data-background-opacity="1" data-background-size="contain"
+                data-background-image='https://live.staticflickr.com/7308/27015315963_810935aad7_k.jpg'>
+            </section>
+
+
+            <section class='left' data-background-iframe='https://www.youtube.com/embed/Rg06P3zk3G4?si=i6pZoTf73LNissKb'
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-background-opacity="1">
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/jdm.jpg'>
+                <div class="fragment fade-out center image-title">
+                    <h3>Jefferson Davis Monument</h3>
+                    <h4>Fairview, Ky, 1924</h4>
+                </div>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/lincoln.jpg'>
+                <div class="fragment fade-out center image-title">
+                    <h3>Abraham Lincoln Birthplace</h3>
+                    <h4>LaRue County, Ky, 1911</h4>
+                </div>
+            </section>
+
+            <section data-background-image='./images/mountains.jpg' data-background-opacity="0.6">
+                <span class="title-slide-font">Mountains & Coal</h3>
+
+            </section>
+
+            <section class='left' data-background-iframe='./map/?location=bh' data-background-opacity="1">
+            </section>
+
+            <section data-background-opacity="1" data-background-size="cover"
+                data-background-image='./images/blue-heron-miners.jpeg'>
+                <div class="fragment fade-out center image-title">
+                    <h3>Blue Heron, Mine 18</h3>
+                    <h4>Big South Fork, Ky, 1940s</h4>
+                </div>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="cover"
+                data-background-image='./images/blue-heron-family.jpg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="cover"
+                data-background-image='https://www.nps.gov/common/upload/akr/park/biso/4F026159-DDCC-8E58-A1288561B673CF76/4F026159-DDCC-8E58-A1288561B673CF76.jpg?autorotate=false&maxWidth=1300&maxHeight=1020&format=webp'>
+                <div class="fragment fade-out center image-title">
+                    <h3>Blue Heron</h3>
+                    <h4>Big South Fork, Ky, 1970s</h4>
+                </div>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/bh-01.jpeg'>
+                <div class="fragment fade-out center image-title">
+                    <h3>Blue Heron, today</h3>
+                </div>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/bh-02.jpeg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/bh-03.jpeg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/yahoo.jpg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/valley.jpeg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/nat-brg.jpeg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-iframe='https://sheltoweetrace.com/hike/print/'>
+            </section>
+
+            <section class='left' data-background-iframe='./map/?location=hs' data-background-opacity="1">
+            </section>
+
+            <section data-background-opacity="1" data-background-size="cover"
+                data-background-image='https://www.nps.gov/cuga/learn/historyculture/images/Hensley-Elijah-Anne-Scott-Home-Photo-1940-Hensley-Settlement-cropped-688.jpg'>
+                <div class="fragment fade-out center image-title">
+                    <h3>Hensley Settlement</h3>
+                    <h4>Hensley family, 1940s</h4>
+                </div>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="cover"
+                data-background-image='https://img.newspapers.com/img/img?user=5640803&id=108451368&clippingId=22767393'>
+                <div class="fragment fade-out center image-title">
+                    <h3>Sherman Hensley</h3>
+                    <h4>Courier-Journal, 1950</h4>
+                </div>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/hens-01.jpeg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/hens-02.jpeg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/white-rocks.jpeg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/gap-01.jpeg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/gap-02.jpeg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/gap-03.jpeg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-iframe='https://www.outragegis.com/gap/3d/'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/hens-end.jpeg'>
+            </section>
+
+
+            <section data-pre-load
+                data-background-image="https://www.outragegis.com/weather/img/animation/yesterday/Dome.gif"
+                data-background-opacity="0.4">
+                <h5>Thank you</h5>
+                <h4 class='fragment'>
+                    Unfold your next Appalachian adventure <a href="https://www.outragegis.com/trails/shop"
+                        target="_blank">🔗</a>
+                </h4>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://uky-gis.github.io/geo509/slides/dist/reveal.js"></script>
+    <script src="https://uky-gis.github.io/geo509/slides/dist/plugin/notes/notes.js"></script>
+    <script src="https://uky-gis.github.io/geo509/slides/dist/plugin/markdown/markdown.js"></script>
+    <script src="https://uky-gis.github.io/geo509/slides/dist/plugin/highlight/highlight.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+            backgroundTransition: "fade",
+            // Transition style
+            transition: "fade", // none/fade/slide/convex/concave/zoom
+
+            // Transition speed
+            transitionSpeed: "fast", // default/fast/slow
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        });
+    </script>
+</body>
+
+</html>
