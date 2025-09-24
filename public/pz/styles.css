@@ -1,0 +1,130 @@
+@import "https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap";
+
+:root {
+  --base-font: "Funnel Display", sans-serif;
+  --fancy-font: "Funnel Display", sans-serif;
+}
+
+/* UK Colors: 
+                #c7c9c8 light gray 
+                #63666a dark gray
+                #15397f dark blue
+                #009bda light blue
+                #0033a0 official blue
+            */
+body,
+section,
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--base-font), sans-serif !important;
+  /* font-family: "Edu SA Beginner", cursive !important; */
+}
+
+h5 {
+  /* font-family: "Edu SA Beginner", cursive !important; */
+  font-family: var(--base-font), sans-serif !important;
+}
+
+.top-module {
+  position: absolute;
+  bottom: 1.5em;
+  left: 20px;
+  z-index: 3333;
+  font-size: 0.5em;
+  opacity: 0.5;
+  font-family: var(--base-font);
+}
+
+.image-title {
+  padding: 1rem;
+  background-color: #33333388;
+  border-radius: 0.5em;
+  opacity: 1;
+  font-family: var(--base-font);
+}
+
+blockquote {
+  padding: 2rem !important;
+  background-color: #33333388;
+  border-radius: 0.5em;
+  font-size: 0.8em;
+  line-height: 1.3em;
+}
+
+.item-download {
+  position: absolute !important;
+  /* left: 0 !important;
+      bottom: 0 !important; */
+  transform: translate(calc(100vw / 2 * -1), 100px) !important;
+  z-index: 9999;
+  font-size: 0.5em;
+  opacity: 1;
+}
+
+.highlight-p {
+  background-color: #63666a;
+  padding: 2px;
+}
+
+.title-slide-font {
+  font-size: 8rem !important;
+  /* font-family: "Edu SA Beginner", cursive; */
+  font-family: var(--base-font), sans-serif !important;
+  font-weight: 900;
+  padding-bottom: 0.5em;
+  text-shadow: 2px 2px 2px #333;
+}
+
+.title-font {
+  font-size: 8rem !important;
+  line-height: 5rem;
+  /* font-family: "Edu SA Beginner", cursive; */
+  font-family: var(--base-font), sans-serif !important;
+  font-weight: 800;
+  text-shadow: 2px 2px 2px #333;
+  /* text-transform: uppercase; */
+}
+
+@keyframes shine {
+  0% {
+    color: #fff;
+    text-shadow: 2px 2px 2px #333;
+  }
+
+  50% {
+    color: #ffff00;
+    text-shadow: 0 0 1px orange, 0 0 2px orange, 0 0 3px orange,
+      0 0 4px lightgoldenrodyellow, 0 0 5px orange;
+  }
+
+  100% {
+    color: #fff;
+    text-shadow: 2px 2px 2px #333;
+  }
+}
+
+.shine-text {
+  animation: shine 1s 1 ease-in-out;
+}
+
+@keyframes enlarge {
+  0% {
+    transform: scale(1);
+    font-size: 1em;
+  }
+
+  50% {
+    transform: scale(1.4) !important;
+  }
+
+  100% {
+    transform: scale(1);
+    font-size: 1em;
+  }
+}
+
+section a:hover {
+  animation: shine 1s ease-in-out !important;
+}
