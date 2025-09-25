@@ -89,11 +89,12 @@
             </section>
 
             <section class="left" data-background-image='./images/background.jpg' data-background-opacity="0.3">
-                <h3 class="r-fit">Source imagery</h3>
+                <h3 class="r-fit">Raw imagery</h3>
                 <ul>
                     <li class="fragment">How to get it?</li>
                     <li class="fragment">Why would you want it?</li>
                     <li class="fragment">Gorgeous natural views!</li>
+                    <li class="fragment">Better sense of scale and context.</li>
                 </ul>
             </section>
 
@@ -101,17 +102,26 @@
                 <h3 class="r-fit">Imagine</h3>
                 <ul>
                     <li class="fragment">Walking downtown and asking</li>
-                    <li class="fragment">"What's on the other side?"</li>
+                    <li class="fragment">"What's on the other side of this building?"</li>
                     <li class="fragment">View it on your mobile device.</li>
                 </ul>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/prov.jpg'>
+            </section>
+
+            <section data-background-opacity="1" data-background-size="contain"
+                data-background-image='./images/prov-1.jpeg'>
             </section>
 
             <section class="left" data-background-image='./images/background.jpg' data-background-opacity="0.3">
                 <h3 class="r-fit">Challenges</h3>
                 <ul>
                     <li class="fragment">Over 4.4 million images</li>
-                    <li class="fragment">40 MB and 100 MB per image</li>
+                    <li class="fragment">40 MB – 100 MB per image</li>
                     <li class="fragment">At roughly 10k x 15k pixels</li>
+                    <li class="fragment">TIFFs in the browser?</li>
                 </ul>
             </section>
 
@@ -163,17 +173,30 @@
             <section class="left" data-background-image='./images/background.jpg' data-background-opacity="0.3">
                 <h3 class="r-fit">Centroids</h3>
                 <ul>
-                    <li class="fragment">Create vector tile of centroids</li>
-                    <li class="fragment">2.2 GB to 300 MB</li>
-                    <li class="fragment">Symbolize them by camera orientation.</li>
+                    <li class="fragment">Create vector tile of centroids.</li>
+                    <li class="fragment">2.2 GB becomes 300 MB.</li>
+                    <li class="fragment">Symbolize by camera orientation.</li>
                 </ul>
+            </section>
+
+            <section data-background-opacity="1"
+                data-background-iframe='https://pmtiles.io/#url=https%3A%2F%2Fnyc3.digitaloceanspaces.com%2Fastoria%2Ftiles%2Fphase3-obliques%2Fcentroids_camera_directions.pmtiles&map=15/37.98035/-84.5209&inspectFeatures=true'>
+            </section>
+
+            <section data-background-image='./images/background.jpg' data-background-opacity="0.3">
+                <h3 class="r-fit">Attributes needed for intuitive symbology</h3>
             </section>
 
             <section data-background-opacity="1" data-background-image='./images/symbols.jpg'>
             </section>
 
-            <section data-background-opacity="1"
-                data-background-iframe='https://pmtiles.io/#url=https%3A%2F%2Fnyc3.digitaloceanspaces.com%2Fastoria%2Ftiles%2Fphase3-obliques%2Fcentroids_camera_directions.pmtiles&map=15/37.98035/-84.5209&inspectFeatures=true'>
+            <section data-background-image='./images/background.jpg' data-background-opacity="0.3">
+                <h3 class="r-fit">Time for data munging</h3>
+                <h3 class="r-fit fragment">to find which way is up</h3>
+            </section>
+
+            <section data-background-opacity="1" data-background-image='./images/image-attributes.jpg'
+                data-background-size="contain">
             </section>
 
             <section data-background-opacity="1" data-background-image='./images/modify-centroids.jpg'
@@ -183,7 +206,7 @@
             <section data-background-image='./images/background.jpg' data-background-opacity="0.2" data-markdown
                 data-separator="---" data-background-color=#2D2D2D>
                 <textarea data-template>
-					## Make the lookup table
+					### Make the lookup table
 					---
 					```python
 # List of file paths to FGDBs with image frame feature classes
@@ -198,7 +221,7 @@ data = [
 					--- 
 
 					```py
-					# Make the empty table
+					# Make the empty dictionary to hold results
 					fwdFlightDirection = {
     "total": 0,
     "North": 0,
@@ -275,6 +298,18 @@ data = [
             <section data-background-opacity="1" data-background-image='./images/cog-preview.jpg'>
             </section>
 
+            <section class="center" data-background-image='./images/background.jpg' data-background-opacity="0.3">
+                <h3 class="r-fit">Live demo</h3>
+                <ul>
+                    <li class="fragment"><a href="https://boydx.github.io/phase-3-oblique-centroids"
+                            target="_blank">boydx.github.io/phase-3-oblique-centroids</a></li>
+                </ul>
+            </section>
+
+            <section data-background-image='./images/background.jpg' data-background-opacity="0.3">
+                <h3 class="r-fit">Where's Wally?</h3>
+            </section>
+
 
             <section data-background-opacity="1" data-background-size="contain"
                 data-background-image='./images/obliques/chickasaw.jpeg'>
@@ -305,7 +340,7 @@ data = [
                 data-background-image='./images/obliques/lincoln.jpg'>
             </section>
 
-            <section data-background-image='./images/obliques/mountains.jpg' data-background-opacity="0.6">
+            <section data-background-image='./images/obliques/mountains.jpg'>
             </section>
 
 
